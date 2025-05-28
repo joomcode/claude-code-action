@@ -47,10 +47,12 @@ export async function prepareMcpConfig(
             "-e", process.env.JIRA_USERNAME,
             "-e", process.env.JIRA_API_TOKEN,
             "-e", "READ_ONLY_MODE=true",
+            "-e", "MCP_VERBOSE=true",
             "ghcr.io/sooperset/mcp-atlassian:latest"
           ],
           "env": {
-            READ_ONLY_MODE: "true"
+            READ_ONLY_MODE: "true",
+            MCP_VERBOSE: "true",
           }
         }
       },
