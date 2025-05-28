@@ -37,6 +37,22 @@ export async function prepareMcpConfig(
             REPO_DIR: process.env.GITHUB_WORKSPACE || process.cwd(),
           },
         },
+        atlassian: {
+          command: "docker",
+          args: [
+            "run",
+            "-i",
+            "--rm",
+            "-e", process.env.JIRA_URL,
+            "-e", process.env.JIRA_USERNAME,
+            "-e", process.env.JIRA_API_TOKEN,
+            "-e", "READ_ONLY_MODE=true",
+            "ghcr.io/sooperset/mcp-atlassian:latest"
+          ],
+          "env": {
+            READ_ONLY_MODE: "true"
+          }
+        }
       },
     };
 
