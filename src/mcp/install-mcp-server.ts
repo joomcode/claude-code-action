@@ -43,9 +43,9 @@ export async function prepareMcpConfig(
             "run",
             "-i",
             "--rm",
-            "-e", process.env.JIRA_URL,
-            "-e", process.env.JIRA_USERNAME,
-            "-e", process.env.JIRA_API_TOKEN,
+            "-e", `JIRA_URL=${process.env.JIRA_URL}`,
+            "-e", `JIRA_USERNAME=${process.env.JIRA_USERNAME}`,
+            "-e", `JIRA_API_TOKEN=${process.env.JIRA_API_TOKEN}`,
             "-e", "READ_ONLY_MODE=true",
             "-e", "MCP_VERBOSE=true",
             "ghcr.io/sooperset/mcp-atlassian:latest"
