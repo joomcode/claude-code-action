@@ -89,6 +89,26 @@ export async function prepareMcpConfig(
       },
     };
 
+    // Enable atlassian MCP server
+    baseMcpConfig.mcpServers.atlassian = {
+      command: "docker",
+      args: [
+        "run",
+        "-i",
+        "--rm",
+        "-e", `JIRA_URL=${process.env.JIRA_URL}`,
+        "-e", `JIRA_USERNAME=${process.env.JIRA_USERNAME}`,
+        "-e", `JIRA_API_TOKEN=${process.env.JIRA_API_TOKEN}`,
+        "-e", "READ_ONLY_MODE=true",
+        "-e", "MCP_VERBOSE=true",
+        "ghcr.io/sooperset/mcp-atlassian:latest"
+      ],
+      env: {
+        READ_ONLY_MODE: "true",
+        MCP_VERBOSE: "true",
+      }
+    };
+
     // Include file ops server when commit signing is enabled
     if (context.inputs.useCommitSigning) {
       baseMcpConfig.mcpServers.github_file_ops = {
